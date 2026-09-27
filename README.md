@@ -83,3 +83,7 @@ Añade un objeto al arreglo `noticias` de `data/noticias.json`:
 
 Fotografías de [Unsplash](https://unsplash.com/), usadas en la maqueta original.
 Las noticias son contenido de ejemplo para fines académicos.
+
+
+##Autor
+Dev. Jhanpol Parra Barreto
