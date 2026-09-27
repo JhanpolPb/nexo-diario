@@ -1,0 +1,106 @@
+{
+  "categorias": [
+    { "nombre": "Tecnología", "clase": "tecnologia", "imagen": "assets/img/categorias/tecnologia.jpg" },
+    { "nombre": "Educación", "clase": "educacion", "imagen": "assets/img/categorias/educacion.jpg" },
+    { "nombre": "Turismo", "clase": "turismo", "imagen": "assets/img/categorias/turismo.jpg" },
+    { "nombre": "Comercio", "clase": "comercio", "imagen": "assets/img/categorias/comercio.jpg" }
+  ],
+  "noticias": [
+    {
+      "id": 1,
+      "titulo": "La inteligencia artificial transforma la educación",
+      "resumen": "Los modelos de IA están redefiniendo cómo los estudiantes aprenden y los docentes enseñan en todo el mundo.",
+      "contenido": "La inteligencia artificial está revolucionando el sector educativo de maneras que hace una década parecían imposibles. Herramientas basadas en modelos de lenguaje permiten ahora a los estudiantes recibir tutoría personalizada las 24 horas del día, adaptando el ritmo y el contenido a sus necesidades específicas.\n\nUniversidades líderes en América Latina han comenzado a integrar plataformas de IA en sus aulas, reportando mejoras significativas en la retención del conocimiento y en los resultados académicos. En Colombia, el Ministerio de Educación ha lanzado un programa piloto que beneficia a más de 50.000 estudiantes en zonas rurales.\n\nLos expertos advierten, sin embargo, que la tecnología debe complementar, no reemplazar, el rol del docente. \"La IA puede personalizar el aprendizaje, pero la empatía y la guía humana siguen siendo irreemplazables\", señala la doctora María Fernández, investigadora en pedagogía digital.\n\nEl debate sobre el acceso equitativo a estas herramientas sigue abierto. La brecha digital entre zonas urbanas y rurales representa uno de los mayores desafíos para garantizar que todos los estudiantes se beneficien de esta transformación educativa.",
+      "categoria": "Tecnología",
+      "autor": "Carlos Mendoza",
+      "fecha": "2026-09-12",
+      "imagen": "assets/img/noticias/noticia-1.jpg",
+      "destacada": true,
+      "lecturaMin": 4
+    },
+    {
+      "id": 2,
+      "titulo": "Nuevas experiencias educativas para estudiantes del siglo XXI",
+      "resumen": "Metodologías innovadoras y aprendizaje experiencial redefinen el aula moderna en colegios de toda la región.",
+      "contenido": "El concepto de aula está evolucionando rápidamente. Colegios de Bogotá, Medellín y Cali están implementando metodologías de aprendizaje basado en proyectos que conectan el conocimiento académico con problemas reales de la comunidad.\n\nEstudiantes de secundaria diseñan soluciones para desafíos locales: desde sistemas de recolección de agua lluvia hasta aplicaciones para conectar a productores campesinos con compradores urbanos. El aprendizaje deja de ser abstracto y se convierte en agente de cambio.\n\nLa metodología STEM (Ciencia, Tecnología, Ingeniería y Matemáticas) cobra fuerza en instituciones públicas y privadas. Con kits de robótica, impresoras 3D y laboratorios de fabricación digital, los estudiantes desarrollan habilidades que el mercado laboral demanda con urgencia.\n\n\"Queremos que los jóvenes sean creadores, no solo consumidores de tecnología\", explica la rectora Lucía Ospina del Colegio Distrital El Futuro, uno de los centros educativos pioneros en estas iniciativas.",
+      "categoria": "Educación",
+      "autor": "Ana Torres",
+      "fecha": "2026-09-11",
+      "imagen": "assets/img/noticias/noticia-2.jpg",
+      "destacada": true,
+      "lecturaMin": 3
+    },
+    {
+      "id": 3,
+      "titulo": "Destinos turísticos que están ganando popularidad en 2026",
+      "resumen": "Viajeros de todo el mundo descubren joyas ocultas y destinos emergentes que combinan naturaleza, cultura y autenticidad.",
+      "contenido": "El turismo sostenible se consolida como la tendencia dominante de 2026. Destinos que ofrecen experiencias auténticas, contacto con comunidades locales y bajo impacto ambiental están captando la atención de una nueva generación de viajeros conscientes.\n\nEn Colombia, el Eje Cafetero sigue consolidándose como uno de los destinos más atractivos de Sudamérica. La combinación de paisajes de montaña, cultura cafetera y gastronomía local atrae a turistas de Europa, América del Norte y Asia en números récord.\n\nPor otro lado, Capadocia en Turquía, Oaxaca en México y el desierto de Atacama en Chile lideran las listas de destinos emergentes. Los viajeros buscan conexión real con el entorno, alejándose de los circuitos masivos y los hoteles de cadena.\n\nLas agencias de viaje reportan un incremento del 34 % en la demanda de paquetes de ecoturismo y turismo rural respecto al año anterior. La experiencia, más que el lujo, es el nuevo lujo.",
+      "categoria": "Turismo",
+      "autor": "Sofía Ramírez",
+      "fecha": "2026-09-10",
+      "imagen": "assets/img/noticias/noticia-3.jpg",
+      "destacada": true,
+      "lecturaMin": 3
+    },
+    {
+      "id": 4,
+      "titulo": "El comercio electrónico supera expectativas en América Latina",
+      "resumen": "Las ventas en línea crecen un 42 % en el primer semestre de 2026, impulsadas por la adopción masiva del móvil y los pagos digitales.",
+      "contenido": "El ecosistema de comercio electrónico en América Latina atraviesa un momento de expansión sin precedentes. Según el más reciente informe de la Cámara Colombiana de Comercio Electrónico, las transacciones en línea crecieron un 42 % en el primer semestre de 2026 en comparación con el mismo período del año anterior.\n\nEl auge de los pagos digitales, la proliferación de smartphones de gama media y la mejora en la infraestructura de conectividad han sido los catalizadores de este crecimiento. Las billeteras digitales de los principales bancos han democratizado el acceso al comercio en línea.\n\nLas pequeñas y medianas empresas (pymes) son las grandes protagonistas de esta historia. Negocios que antes dependían exclusivamente del comercio presencial ahora generan entre el 30 % y el 60 % de sus ingresos a través de canales digitales.\n\nEl reto sigue siendo la logística de última milla en zonas apartadas y la educación digital para comerciantes mayores que aún desconfían de las plataformas en línea.",
+      "categoria": "Comercio",
+      "autor": "Rodrigo Vargas",
+      "fecha": "2026-09-09",
+      "imagen": "assets/img/noticias/noticia-4.jpg",
+      "destacada": false,
+      "lecturaMin": 3
+    },
+    {
+      "id": 5,
+      "titulo": "Nuevos chips cuánticos prometen revolucionar el procesamiento de datos",
+      "resumen": "Grandes empresas tecnológicas presentan avances en computación cuántica que podrían cambiar la industria en los próximos cinco años.",
+      "contenido": "La computación cuántica dejó de ser una promesa lejana para convertirse en una realidad tangible. Varias empresas tecnológicas anunciaron esta semana avances significativos en sus procesadores cuánticos, con chips que superan la barrera de los 1.000 cúbits con tasas de error históricamente bajas.\n\nEstos desarrollos tienen implicaciones directas para sectores como la farmacéutica, las finanzas y la ciberseguridad. Simulaciones que hoy requieren semanas en supercomputadores convencionales podrían realizarse en minutos con la nueva generación de procesadores cuánticos.\n\nEn Colombia, varios centros de investigación han comenzado a formar a los primeros ingenieros especializados en computación cuántica, anticipando la demanda de talento que traerá esta revolución tecnológica.\n\nLos expertos advierten que la computación cuántica también representa un desafío para la seguridad de los sistemas de cifrado actuales, lo que impulsa el desarrollo paralelo de criptografía poscuántica.",
+      "categoria": "Tecnología",
+      "autor": "Juliana Pérez",
+      "fecha": "2026-09-08",
+      "imagen": "assets/img/noticias/noticia-5.jpg",
+      "destacada": false,
+      "lecturaMin": 3
+    },
+    {
+      "id": 6,
+      "titulo": "Colombia apuesta por el turismo gastronómico como motor de desarrollo",
+      "resumen": "La riqueza culinaria del país se convierte en un atractivo internacional, generando empleo y preservando tradiciones culturales.",
+      "contenido": "La gastronomía colombiana está conquistando paladares internacionales y se posiciona como uno de los principales atractivos del turismo nacional. Ciudades como Cartagena, Medellín y Bogotá concentran una oferta culinaria que fusiona tradiciones indígenas, africanas y europeas con técnicas contemporáneas.\n\nEl reconocimiento internacional no ha tardado en llegar. Restaurantes colombianos aparecen con creciente frecuencia en las listas de los mejores del mundo, y la cocina colombiana ocupa un lugar cada vez más visible en el mapa gastronómico global.\n\nEl programa \"Sabores de Colombia\" integra rutas gastronómicas con visitas a productores locales, mercados campesinos y festivales de comida tradicional en 18 departamentos del país.\n\nLa iniciativa ha generado más de 12.000 empleos directos en el sector de alimentos y ha contribuido a preservar recetas y técnicas culinarias que estaban en riesgo de perderse.",
+      "categoria": "Turismo",
+      "autor": "Camila Herrera",
+      "fecha": "2026-09-07",
+      "imagen": "assets/img/noticias/noticia-6.jpg",
+      "destacada": false,
+      "lecturaMin": 3
+    },
+    {
+      "id": 7,
+      "titulo": "Programas de becas abren oportunidades para jóvenes de bajos recursos",
+      "resumen": "Nuevas alianzas público-privadas financian educación superior para más de 15.000 estudiantes vulnerables en todo el país.",
+      "contenido": "Una coalición de empresas privadas, fundaciones y entidades públicas anunció esta semana la ampliación del programa de becas \"Futuro en Marcha\", que cubrirá la totalidad de los costos de educación superior para 15.000 jóvenes de escasos recursos durante los próximos cuatro años.\n\nEl programa incluye no solo el pago de matrícula, sino también auxilio de transporte, alimentación, materiales académicos y acompañamiento personalizado de profesionales del sector privado. El objetivo es reducir la tasa de deserción universitaria.\n\nEntre las empresas participantes se encuentran algunas de las más grandes del país en los sectores financiero, tecnológico y energético. \"Invertir en educación es invertir en el futuro\", señaló uno de los directivos participantes.\n\nLas universidades adscritas al programa son tanto públicas como privadas, y abarcan desde carreras técnicas hasta programas de posgrado en las áreas con mayor demanda laboral proyectada para 2030.",
+      "categoria": "Educación",
+      "autor": "Felipe Morales",
+      "fecha": "2026-09-06",
+      "imagen": "assets/img/noticias/noticia-7.jpg",
+      "destacada": false,
+      "lecturaMin": 3
+    },
+    {
+      "id": 8,
+      "titulo": "Mercados locales se digitalizan para competir con grandes plataformas",
+      "resumen": "Comerciantes de plazas de mercado tradicionales adoptan herramientas digitales para llegar a más clientes y aumentar sus ventas.",
+      "contenido": "Las plazas de mercado tradicionales de Bogotá y Medellín son ahora escenarios de una silenciosa revolución digital. Comerciantes que durante décadas dependieron exclusivamente del tráfico presencial ahora gestionan pedidos por mensajería, publican en redes sociales y usan aplicaciones de domicilios para llegar a hogares de toda la ciudad.\n\nEl proyecto \"Mercados Digitales\", impulsado por entidades públicas en alianza con el sector privado, ha capacitado a más de 3.000 comerciantes en herramientas digitales básicas durante el último año.\n\nLos resultados son alentadores: los comerciantes capacitados reportan en promedio un incremento del 28 % en sus ingresos mensuales y una reducción en la pérdida de productos perecederos gracias a una mejor gestión de inventarios.\n\nLa iniciativa también contempla la creación de plataformas de comercio electrónico específicas para mercados locales, que permitan a los consumidores comprar directamente a los productores sin intermediarios, garantizando precios justos para ambas partes.",
+      "categoria": "Comercio",
+      "autor": "Valentina Cruz",
+      "fecha": "2026-09-05",
+      "imagen": "assets/img/noticias/noticia-8.jpg",
+      "destacada": false,
+      "lecturaMin": 3
+    }
+  ]
+}
