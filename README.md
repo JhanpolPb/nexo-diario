@@ -85,5 +85,5 @@ Fotografías de [Unsplash](https://unsplash.com/), usadas en la maqueta original
 Las noticias son contenido de ejemplo para fines académicos.
 
 
-##Autor
+## Autor
 Dev. Jhanpol Parra Barreto
