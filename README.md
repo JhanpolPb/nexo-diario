@@ -4,9 +4,6 @@ Periódico digital con noticias de **Tecnología, Educación, Turismo y Comercio
 Permite explorar noticias, filtrarlas por categoría, leer el detalle, guardarlas
 como favoritas y enviar un mensaje de contacto.
 
-Maquetación de referencia (Figma Make):
-https://www.figma.com/make/O13Iyb6sxZp3MxJJkAcdJE/Mockups-for-Nexo-Diario
-
 ## Tecnologías
 
 - HTML5, CSS3 y JavaScript (sin frameworks ni proceso de compilación)
