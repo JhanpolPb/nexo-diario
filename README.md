@@ -21,9 +21,6 @@ Cualquiera de estas opciones sirve:
 
 - **VS Code:** extensión *Live Server* → clic derecho en `index.html` → *Open with Live Server*.
 - **Node.js:** `npx serve .` y abrir la URL que muestra la consola.
-- **Python:** `python -m http.server 5500` y abrir http://localhost:5500
-
-También puede publicarse tal cual en GitHub Pages.
 
 ## Páginas
 
