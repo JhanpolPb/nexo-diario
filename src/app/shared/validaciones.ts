@@ -33,6 +33,11 @@ export function validarCorreo(control: AbstractControl): ValidationErrors | null
   return null;
 }
 
+/** Campo obligatorio sin otras reglas (listas, fechas, imágenes). */
+export function validarRequerido(mensaje: string): ValidatorFn {
+  return control => (texto(control) ? null : error(mensaje));
+}
+
 /** Campo obligatorio con longitud mínima y máxima. */
 export function validarTexto(etiqueta: string, min: number, max: number): ValidatorFn {
   return control => {

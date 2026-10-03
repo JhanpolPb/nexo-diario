@@ -6,7 +6,8 @@
 /** Claves usadas en localStorage, centralizadas para evitar errores de tipeo. */
 export const CLAVES = {
   FAVORITOS: 'nexo_favoritos',
-  MENSAJES: 'nexo_mensajes'
+  MENSAJES: 'nexo_mensajes',
+  NOTICIAS: 'nexo_noticias'
 } as const;
 
 export function leerJSON<T>(clave: string, porDefecto: T): T {

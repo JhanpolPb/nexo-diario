@@ -3,5 +3,6 @@ export const MENU = [
   { texto: 'Inicio', ruta: '/' },
   { texto: 'Noticias', ruta: '/noticias' },
   { texto: 'Favoritos', ruta: '/favoritos' },
-  { texto: 'Contacto', ruta: '/contacto' }
+  { texto: 'Contacto', ruta: '/contacto' },
+  { texto: 'Administrar', ruta: '/admin' }
 ] as const;

@@ -5,14 +5,28 @@
     <p class="subtitulo">Explora nuestras últimas publicaciones</p>
   </div>
 
-  <div class="filtros" role="group" aria-label="Filtrar por categoría">
-    @for (opcion of opciones(); track opcion) {
-      <button type="button" class="filtro" [attr.aria-pressed]="opcion === filtroActivo()"
-              (click)="filtrar(opcion)">{{ opcion }}</button>
-    }
+  <div class="barra-noticias">
+    <div class="buscador" role="search">
+      <i class="bi bi-search" aria-hidden="true"></i>
+      <label class="visually-hidden" for="buscar">Buscar noticias</label>
+      <input #campoBusqueda class="form-control" type="search" id="buscar" autocomplete="off"
+             placeholder="Buscar por título, tema o autor" [(ngModel)]="busqueda">
+      @if (busqueda()) {
+        <button type="button" class="buscador-limpiar" (click)="limpiarBusqueda(campoBusqueda)" aria-label="Borrar búsqueda">
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </button>
+      }
+    </div>
+
+    <div class="filtros" role="group" aria-label="Filtrar por categoría">
+      @for (opcion of opciones(); track opcion) {
+        <button type="button" class="filtro" [attr.aria-pressed]="opcion === filtroActivo()"
+                (click)="filtrar(opcion)">{{ opcion }}</button>
+      }
+    </div>
   </div>
 
-  <p class="visually-hidden" aria-live="polite">{{ resumenFiltro() }}</p>
+  <p class="resultado-busqueda" [class.visually-hidden]="!busqueda()" aria-live="polite">{{ resumenFiltro() }}</p>
 
   @if (servicio.estado() === 'error') {
     <app-error-carga />
@@ -25,7 +39,19 @@
       </div>
     } @empty {
       @if (servicio.estado() === 'listo') {
-        <p class="col-12 text-center text-secondary py-5">No hay noticias en esta categoría por ahora.</p>
+        <div class="col-12">
+          <div class="estado-vacio py-5">
+            <div class="estado-vacio-icono"><i class="bi bi-search" aria-hidden="true"></i></div>
+            @if (busqueda()) {
+              <h2>No encontramos noticias para “{{ busqueda() }}”</h2>
+              <p>Prueba con otras palabras o revisa la categoría seleccionada.</p>
+              <button type="button" class="btn btn-nexo" (click)="limpiarBusqueda(campoBusqueda)">Borrar búsqueda</button>
+            } @else {
+              <h2>No hay noticias en esta categoría por ahora</h2>
+              <p>Vuelve pronto o explora otra categoría.</p>
+            }
+          </div>
+        </div>
       }
     }
   </div>

@@ -24,6 +24,9 @@ export interface Noticia {
   lecturaMin: number;
 }
 
+/** Datos de una noticia antes de asignarle un id (formulario de administración). */
+export type NoticiaNueva = Omit<Noticia, 'id'>;
+
 /** Contenido completo del archivo JSON. */
 export interface DatosNoticias {
   categorias: Categoria[];

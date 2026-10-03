@@ -44,6 +44,8 @@
         </button>
         <a class="btn btn-nexo" routerLink="/contacto">Contactar</a>
       </div>
+
+      <app-compartir [titulo]="n.titulo" [url]="enlace()" />
     } @else if (servicio.estado() === 'listo') {
       <div class="estado-vacio">
         <div class="estado-vacio-icono"><i class="bi bi-newspaper" aria-hidden="true"></i></div>
@@ -54,3 +56,19 @@
     }
   </article>
 </div>
+
+@if (relacionadas().length) {
+  <section class="bg-white seccion relacionadas" aria-labelledby="titulo-relacionadas">
+    <div class="container">
+      <p class="antetitulo">Sigue leyendo</p>
+      <h2 class="titulo-seccion mb-4" id="titulo-relacionadas">También te puede interesar</h2>
+      <div class="row g-4">
+        @for (noticia of relacionadas(); track noticia.id) {
+          <div class="col-md-6 col-lg-4">
+            <app-tarjeta-noticia [noticia]="noticia" />
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+}

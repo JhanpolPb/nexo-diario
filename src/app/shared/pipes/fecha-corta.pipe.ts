@@ -6,6 +6,7 @@ const MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'o
 @Pipe({ name: 'fechaCorta' })
 export class FechaCortaPipe implements PipeTransform {
   transform(fechaISO: string): string {
+    if (!fechaISO) return '';
     const [anio, mes, dia] = fechaISO.split('-').map(Number);
     return `${dia} ${MESES[mes - 1]} ${anio}`;
   }

@@ -1,0 +1,109 @@
+<div class="container pagina">
+  <a class="enlace-volver" routerLink="/admin"><span aria-hidden="true">←</span> Volver al panel</a>
+
+  @if (original() === null) {
+    <div class="estado-vacio">
+      <div class="estado-vacio-icono"><i class="bi bi-newspaper" aria-hidden="true"></i></div>
+      <h1>No encontramos esta noticia</h1>
+      <p>Es posible que haya sido eliminada.</p>
+      <a class="btn btn-nexo" routerLink="/admin">Volver al panel</a>
+    </div>
+  } @else {
+    <div class="mb-4">
+      <p class="antetitulo">Administración</p>
+      <h1 class="titulo-pagina">{{ editando() ? 'Editar noticia' : 'Nueva noticia' }}</h1>
+    </div>
+
+    <div class="row g-5">
+      <div class="col-lg-8">
+        <form class="panel formulario-contacto" [formGroup]="formulario" (ngSubmit)="guardar()" novalidate>
+          <div class="mb-4">
+            <label class="form-label" for="noticia-titulo">Título</label>
+            <input class="form-control" id="noticia-titulo" formControlName="titulo" maxlength="120"
+                   aria-describedby="error-titulo" [class.is-invalid]="mostrarError('titulo')">
+            <div class="invalid-feedback" id="error-titulo">{{ error('titulo') }}</div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label" for="noticia-resumen">Resumen</label>
+            <textarea class="form-control" id="noticia-resumen" formControlName="resumen" rows="2" maxlength="250"
+                      aria-describedby="error-resumen ayuda-resumen" [class.is-invalid]="mostrarError('resumen')"></textarea>
+            <div class="invalid-feedback" id="error-resumen">{{ error('resumen') }}</div>
+            <div class="form-text" id="ayuda-resumen">Una o dos frases que se muestran en la tarjeta.</div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label" for="noticia-contenido">Contenido</label>
+            <textarea class="form-control" id="noticia-contenido" formControlName="contenido" rows="9"
+                      aria-describedby="error-contenido ayuda-contenido" [class.is-invalid]="mostrarError('contenido')"></textarea>
+            <div class="invalid-feedback" id="error-contenido">{{ error('contenido') }}</div>
+            <div class="form-text" id="ayuda-contenido">
+              Separa los párrafos con una línea en blanco. Tiempo de lectura estimado: {{ lecturaMin() }} min.
+            </div>
+          </div>
+
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <label class="form-label" for="noticia-categoria">Categoría</label>
+              <select class="form-select" id="noticia-categoria" formControlName="categoria"
+                      aria-describedby="error-categoria" [class.is-invalid]="mostrarError('categoria')">
+                <option value="" disabled>Selecciona una categoría</option>
+                @for (categoria of servicio.categorias(); track categoria.nombre) {
+                  <option [value]="categoria.nombre">{{ categoria.nombre }}</option>
+                }
+              </select>
+              <div class="invalid-feedback" id="error-categoria">{{ error('categoria') }}</div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="noticia-fecha">Fecha de publicación</label>
+              <input class="form-control" type="date" id="noticia-fecha" formControlName="fecha"
+                     aria-describedby="error-fecha" [class.is-invalid]="mostrarError('fecha')">
+              <div class="invalid-feedback" id="error-fecha">{{ error('fecha') }}</div>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label" for="noticia-autor">Autor</label>
+            <input class="form-control" id="noticia-autor" formControlName="autor" maxlength="60" autocomplete="off"
+                   aria-describedby="error-autor" [class.is-invalid]="mostrarError('autor')">
+            <div class="invalid-feedback" id="error-autor">{{ error('autor') }}</div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label" for="noticia-imagen">Imagen</label>
+            <input class="form-control" id="noticia-imagen" formControlName="imagen" placeholder="https://… o elige una de abajo"
+                   aria-describedby="error-imagen" [class.is-invalid]="mostrarError('imagen')">
+            <div class="invalid-feedback" id="error-imagen">{{ error('imagen') }}</div>
+            <div class="galeria" role="group" aria-label="Imágenes disponibles">
+              @for (ruta of galeria(); track ruta; let i = $index) {
+                <button type="button" class="galeria-opcion" [attr.aria-pressed]="formulario.controls.imagen.value === ruta"
+                        (click)="elegirImagen(ruta)" [attr.aria-label]="'Usar imagen ' + (i + 1)">
+                  <img [src]="ruta" alt="" width="96" height="60" loading="lazy">
+                </button>
+              }
+            </div>
+          </div>
+
+          <div class="form-check form-switch mb-4">
+            <input class="form-check-input" type="checkbox" role="switch" id="noticia-destacada" formControlName="destacada">
+            <label class="form-check-label" for="noticia-destacada">Mostrar como destacada en la página de inicio</label>
+          </div>
+
+          <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-nexo-oscuro btn-enviar" type="submit">
+              {{ editando() ? 'Guardar cambios' : 'Publicar noticia' }}
+            </button>
+            <a class="btn btn-outline-secondary" routerLink="/admin">Cancelar</a>
+          </div>
+        </form>
+      </div>
+
+      <aside class="col-lg-4">
+        <div class="vista-previa">
+          <p class="antetitulo">Vista previa</p>
+          <app-tarjeta-noticia [noticia]="vistaPrevia()" [vistaPrevia]="true" />
+        </div>
+      </aside>
+    </div>
+  }
+</div>

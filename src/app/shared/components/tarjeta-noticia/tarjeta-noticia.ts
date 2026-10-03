@@ -16,4 +16,7 @@ import { BotonFavorito } from '../boton-favorito/boton-favorito';
 export class TarjetaNoticia {
   /** Noticia que se muestra (la recibe del componente padre por property binding). */
   readonly noticia = input.required<Noticia>();
+
+  /** En la vista previa del panel de administración la tarjeta no tiene acciones. */
+  readonly vistaPrevia = input(false);
 }

@@ -4,14 +4,16 @@ import { RouterLink } from '@angular/router';
 
 import { FavoritosService } from '../../core/services/favoritos.service';
 import { NoticiasService } from '../../core/services/noticias.service';
+import { Compartir } from '../../shared/components/compartir/compartir';
 import { ErrorCarga } from '../../shared/components/error-carga/error-carga';
+import { TarjetaNoticia } from '../../shared/components/tarjeta-noticia/tarjeta-noticia';
 import { ClaseCategoriaPipe } from '../../shared/pipes/clase-categoria.pipe';
 import { FechaCortaPipe } from '../../shared/pipes/fecha-corta.pipe';
 
 /** Muestra una noticia completa a partir de la ruta /noticia/:id. */
 @Component({
   selector: 'app-detalle',
-  imports: [RouterLink, ErrorCarga, ClaseCategoriaPipe, FechaCortaPipe],
+  imports: [RouterLink, Compartir, ErrorCarga, TarjetaNoticia, ClaseCategoriaPipe, FechaCortaPipe],
   templateUrl: './detalle.html'
 })
 export class Detalle {
@@ -23,6 +25,14 @@ export class Detalle {
   readonly id = input.required<string>();
 
   protected readonly noticia = computed(() => this.servicio.buscarPorId(Number(this.id())));
+
+  /** Dirección pública de la noticia, para compartirla. */
+  protected readonly enlace = computed(() => new URL(`noticia/${this.id()}`, document.baseURI).href);
+
+  protected readonly relacionadas = computed(() => {
+    const noticia = this.noticia();
+    return noticia ? this.servicio.relacionadas(noticia) : [];
+  });
 
   protected readonly parrafos = computed(() => this.noticia()?.contenido.split('\n\n') ?? []);
 

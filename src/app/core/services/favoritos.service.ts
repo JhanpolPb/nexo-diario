@@ -34,4 +34,11 @@ export class FavoritosService {
     guardarJSON(CLAVES.FAVORITOS, this.ids());
     return agregar;
   }
+
+  /** Quita una noticia de favoritos (por ejemplo, cuando se elimina). */
+  quitar(id: number): void {
+    if (!this.esFavorito(id)) return;
+    this.ids.update(ids => ids.filter(actual => actual !== id));
+    guardarJSON(CLAVES.FAVORITOS, this.ids());
+  }
 }

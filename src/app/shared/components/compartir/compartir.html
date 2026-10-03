@@ -1,0 +1,20 @@
+<div class="compartir">
+  <span class="compartir-titulo">Compartir</span>
+  <div class="compartir-botones">
+    @for (red of redes(); track red.nombre) {
+      <a class="compartir-boton {{ red.clase }}" [href]="red.enlace" target="_blank" rel="noopener"
+         [attr.aria-label]="'Compartir en ' + red.nombre + ' (se abre en una pestaña nueva)'">
+        <i class="bi {{ red.icono }}" aria-hidden="true"></i>
+      </a>
+    }
+    <button type="button" class="compartir-boton" (click)="copiarEnlace()" aria-label="Copiar enlace">
+      <i class="bi" [class.bi-link-45deg]="!aviso()" [class.bi-check-lg]="aviso()" aria-hidden="true"></i>
+    </button>
+    @if (compartirNativo) {
+      <button type="button" class="compartir-boton" (click)="compartir()" aria-label="Más opciones para compartir">
+        <i class="bi bi-share" aria-hidden="true"></i>
+      </button>
+    }
+  </div>
+  <span class="compartir-aviso" role="status">{{ aviso() }}</span>
+</div>

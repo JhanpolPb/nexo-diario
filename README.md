@@ -1,8 +1,9 @@
 # Nexo Diario
 
 Periódico digital con noticias de **Tecnología, Educación, Turismo y Comercio**.
-Permite explorar noticias, filtrarlas por categoría, leer el detalle, guardarlas
-como favoritas y enviar un mensaje de contacto.
+Permite explorar y buscar noticias, filtrarlas por categoría, leer el detalle,
+compartirlas, guardarlas como favoritas, enviar un mensaje de contacto y
+administrar el contenido desde un panel.
 
 **Sitio publicado:** https://jhanpolpb.github.io/nexo-diario/
 
@@ -37,11 +38,24 @@ Angular (por ejemplo `/noticia/3`) funcionen al recargar la página.
 | Ruta | Componente | Qué hace |
 |---|---|---|
 | `/` | `Inicio` | Bienvenida, 3 noticias destacadas, accesos por categoría y llamado a contacto |
-| `/noticias` | `Noticias` | Cuadrícula de noticias con filtros por categoría (`?categoria=Turismo`) |
-| `/noticia/:id` | `Detalle` | Noticia completa con botón de favoritos |
+| `/noticias` | `Noticias` | Buscador y cuadrícula de noticias con filtros por categoría (`?categoria=Turismo`) |
+| `/noticia/:id` | `Detalle` | Noticia completa, favoritos, botones para compartir y noticias relacionadas |
 | `/favoritos` | `Favoritos` | Noticias guardadas y estado vacío cuando no hay ninguna |
 | `/contacto` | `Contacto` | Formulario validado, mensaje de éxito y panel de información |
+| `/admin` | `Admin` | Panel con resumen y tabla de noticias: editar, eliminar y restablecer |
+| `/admin/nueva`, `/admin/editar/:id` | `AdminFormulario` | Formulario validado con vista previa en vivo de la tarjeta |
 | `**` | `NoEncontrada` | Página 404 |
+
+## Funciones destacadas
+
+- **Buscador:** filtra mientras se escribe por título, resumen, contenido, autor o categoría,
+  sin importar tildes ni mayúsculas, y se combina con el filtro de categoría.
+- **Compartir:** WhatsApp, X, Facebook, copiar enlace y el menú nativo del teléfono.
+- **Noticias relacionadas:** al final del detalle, primero las de la misma categoría.
+- **Panel de administración (CRUD):** crear, editar y eliminar noticias con validaciones,
+  galería de imágenes y vista previa. Los cambios se guardan en `localStorage` y se pueden
+  descartar con *Restablecer noticias originales*. Al no haber servidor, solo afectan a ese
+  navegador.
 
 ## Estructura
 
@@ -56,13 +70,14 @@ src/
     ├── app.config.ts          # router, HttpClient
     ├── core/
     │   ├── models/            # interfaces Noticia, Categoria, MensajeContacto
-    │   └── services/          # NoticiasService, FavoritosService, MensajesService
+    │   └── services/          # NoticiasService, FavoritosService, MensajesService, AvisosService
     ├── shared/
-    │   ├── components/        # Encabezado, Pie, TarjetaNoticia, BotonFavorito, ErrorCarga
+    │   ├── components/        # Encabezado, Pie, TarjetaNoticia, BotonFavorito, Compartir, ErrorCarga
     │   ├── pipes/             # fechaCorta, claseCategoria
     │   ├── menu.ts            # enlaces del menú
-    │   └── validaciones.ts    # validadores del formulario
-    └── pages/                 # Inicio, Noticias, Detalle, Favoritos, Contacto, NoEncontrada
+    │   ├── texto.ts           # normalizar() para búsquedas sin tildes
+    │   └── validaciones.ts    # validadores de los formularios
+    └── pages/                 # Inicio, Noticias, Detalle, Favoritos, Contacto, Admin, AdminFormulario, NoEncontrada
 public/
 ├── data/noticias.json         # categorías y noticias
 └── assets/img/                # imágenes de noticias, categorías y portada
@@ -74,13 +89,15 @@ public/
 - **Interpolación:** `{{ noticia.titulo }}`, `{{ n.fecha | fechaCorta }}`.
 - **Property binding:** `[noticia]="noticia"`, `[src]="n.imagen"`, `[class.show]="menuAbierto()"`.
 - **Event binding:** `(click)="favoritos.alternar(id())"`, `(ngSubmit)="enviar()"`.
+- **Two-way binding:** el buscador usa `[(ngModel)]="busqueda"` enlazado a un signal.
 - **Inputs:** `TarjetaNoticia` recibe la noticia con `input.required<Noticia>()`; el router
   entrega `:id` y `?categoria=` como inputs (`withComponentInputBinding`).
 - **Control de flujo:** `@if`, `@for`, `@empty`, `@let`.
 - **Servicios e inyección de dependencias:** `inject(NoticiasService)`.
 - **Signals:** el estado de favoritos se comparte con `signal` y `computed`, así el contador
   del encabezado, los corazones y la página de favoritos se actualizan solos.
-- **Reactive Forms:** el formulario de contacto usa `FormGroup` y validadores propios.
+- **Reactive Forms:** los formularios de contacto y de administración usan `FormGroup` y
+  validadores propios.
 
 ## Agregar una noticia
 

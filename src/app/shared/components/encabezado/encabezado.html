@@ -1,11 +1,11 @@
-<nav class="navbar navbar-expand-md" aria-label="Navegación principal">
+<nav class="navbar navbar-expand-lg" aria-label="Navegación principal">
   <div class="container">
     <a class="logo" routerLink="/" (click)="cerrarMenu()">
       <span class="logo-marca" aria-hidden="true">N</span>
       <span>Nexo<span class="logo-acento">Diario</span></span>
     </a>
 
-    <div class="d-flex align-items-center gap-2 order-md-last">
+    <div class="d-flex align-items-center gap-2 order-lg-last">
       <a class="btn-favoritos-header" routerLink="/favoritos" (click)="cerrarMenu()"
          [attr.aria-label]="'Favoritos (' + favoritos.total() + ' guardadas)'">
         <i class="bi" [class.bi-heart-fill]="favoritos.total() > 0" [class.bi-heart]="favoritos.total() === 0"
@@ -22,8 +22,8 @@
       </button>
     </div>
 
-    <div class="collapse navbar-collapse justify-content-md-center" id="menuPrincipal" [class.show]="menuAbierto()">
-      <ul class="navbar-nav menu-principal gap-md-1">
+    <div class="collapse navbar-collapse justify-content-lg-center" id="menuPrincipal" [class.show]="menuAbierto()">
+      <ul class="navbar-nav menu-principal gap-lg-1">
         @for (item of menu; track item.ruta) {
           <li class="nav-item">
             <a class="nav-link" [routerLink]="item.ruta" routerLinkActive="active"
