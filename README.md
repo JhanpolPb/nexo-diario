@@ -4,58 +4,87 @@ Periódico digital con noticias de **Tecnología, Educación, Turismo y Comercio
 Permite explorar noticias, filtrarlas por categoría, leer el detalle, guardarlas
 como favoritas y enviar un mensaje de contacto.
 
+**Sitio publicado:** https://jhanpolpb.github.io/nexo-diario/
+
 ## Tecnologías
 
-- HTML5, CSS3 y JavaScript (sin frameworks ni proceso de compilación)
+- [Angular 21](https://angular.dev/): componentes *standalone*, signals, router y Reactive Forms
+- TypeScript, HTML5 y CSS3
 - [Bootstrap 5.3](https://getbootstrap.com/) y Bootstrap Icons (desde CDN)
 - Tipografías Inter y Poppins (Google Fonts)
 - `localStorage` para favoritos y mensajes de contacto
+- GitHub Actions + GitHub Pages para el despliegue
 
 ## Cómo ejecutarlo
 
-Las noticias se cargan con `fetch()` desde `data/noticias.json`, por lo que
-**el sitio debe abrirse desde un servidor local**. Si se abre el HTML con doble
-clic (`file://`), el navegador bloquea la carga y aparece un aviso.
+Requisitos: Node.js 20.19 o superior.
 
-Cualquiera de estas opciones sirve:
+```bash
+npm install
+npm start          # servidor de desarrollo en http://localhost:4200
+npm run build      # compilación de producción en dist/nexo-diario/browser
+```
 
-- **VS Code:** extensión *Live Server* → clic derecho en `index.html` → *Open with Live Server*.
-- **Node.js:** `npx serve .` y abrir la URL que muestra la consola.
+## Despliegue
 
-## Páginas
+Cada `push` a `main` ejecuta `.github/workflows/deploy.yml`, que compila con
+`npm run build:pages` (usa `--base-href /nexo-diario/`) y publica el resultado en
+GitHub Pages. El flujo copia `index.html` como `404.html` para que las rutas de
+Angular (por ejemplo `/noticia/3`) funcionen al recargar la página.
 
-| Archivo | Pantalla | Qué hace |
+## Pantallas (rutas)
+
+| Ruta | Componente | Qué hace |
 |---|---|---|
-| `index.html` | Inicio | Bienvenida, 3 noticias destacadas, accesos por categoría y llamado a contacto |
-| `noticias.html` | Listado | Cuadrícula de noticias con filtros por categoría (`?categoria=Turismo`) |
-| `detalle.html` | Detalle | Noticia completa según `?id=N`, con botón de favoritos |
-| `favoritos.html` | Favoritos | Noticias guardadas y estado vacío cuando no hay ninguna |
-| `contacto.html` | Contacto | Formulario validado, mensaje de éxito y panel de información |
+| `/` | `Inicio` | Bienvenida, 3 noticias destacadas, accesos por categoría y llamado a contacto |
+| `/noticias` | `Noticias` | Cuadrícula de noticias con filtros por categoría (`?categoria=Turismo`) |
+| `/noticia/:id` | `Detalle` | Noticia completa con botón de favoritos |
+| `/favoritos` | `Favoritos` | Noticias guardadas y estado vacío cuando no hay ninguna |
+| `/contacto` | `Contacto` | Formulario validado, mensaje de éxito y panel de información |
+| `**` | `NoEncontrada` | Página 404 |
 
 ## Estructura
 
 ```
-nexo-diario/
-├── index.html, noticias.html, detalle.html, favoritos.html, contacto.html
-├── data/
-│   └── noticias.json       # categorías y noticias
-└── assets/
-    ├── css/estilos.css     # identidad visual sobre Bootstrap
-    ├── img/                # imágenes de noticias, categorías y portada
-    └── js/
-        ├── data.js         # carga y consulta de noticias.json
-        ├── storage.js      # acceso a localStorage / sessionStorage
-        ├── validaciones.js # validadores de formularios
-        ├── componentes.js  # encabezado, pie, tarjeta de noticia y favoritos
-        └── inicio.js, noticias.js, detalle.js, favoritos.js, contacto.js
+src/
+├── index.html                 # carga Bootstrap, iconos y fuentes
+├── main.ts                    # arranque de la aplicación
+├── styles.css                 # identidad visual sobre Bootstrap
+└── app/
+    ├── app.ts / app.html      # estructura común: encabezado, <router-outlet>, pie
+    ├── app.routes.ts          # rutas
+    ├── app.config.ts          # router, HttpClient
+    ├── core/
+    │   ├── models/            # interfaces Noticia, Categoria, MensajeContacto
+    │   └── services/          # NoticiasService, FavoritosService, MensajesService
+    ├── shared/
+    │   ├── components/        # Encabezado, Pie, TarjetaNoticia, BotonFavorito, ErrorCarga
+    │   ├── pipes/             # fechaCorta, claseCategoria
+    │   ├── menu.ts            # enlaces del menú
+    │   └── validaciones.ts    # validadores del formulario
+    └── pages/                 # Inicio, Noticias, Detalle, Favoritos, Contacto, NoEncontrada
+public/
+├── data/noticias.json         # categorías y noticias
+└── assets/img/                # imágenes de noticias, categorías y portada
 ```
 
-Cada página indica su sección con `<body data-pagina="...">`; `componentes.js`
-inserta el encabezado y el pie en `#encabezado` y `#pie` y resalta el enlace activo.
+### Conceptos de Angular usados
+
+- **Componentes:** cada pantalla y cada pieza reutilizable es un componente *standalone*.
+- **Interpolación:** `{{ noticia.titulo }}`, `{{ n.fecha | fechaCorta }}`.
+- **Property binding:** `[noticia]="noticia"`, `[src]="n.imagen"`, `[class.show]="menuAbierto()"`.
+- **Event binding:** `(click)="favoritos.alternar(id())"`, `(ngSubmit)="enviar()"`.
+- **Inputs:** `TarjetaNoticia` recibe la noticia con `input.required<Noticia>()`; el router
+  entrega `:id` y `?categoria=` como inputs (`withComponentInputBinding`).
+- **Control de flujo:** `@if`, `@for`, `@empty`, `@let`.
+- **Servicios e inyección de dependencias:** `inject(NoticiasService)`.
+- **Signals:** el estado de favoritos se comparte con `signal` y `computed`, así el contador
+  del encabezado, los corazones y la página de favoritos se actualizan solos.
+- **Reactive Forms:** el formulario de contacto usa `FormGroup` y validadores propios.
 
 ## Agregar una noticia
 
-Añade un objeto al arreglo `noticias` de `data/noticias.json`:
+Añade un objeto al arreglo `noticias` de `public/data/noticias.json`:
 
 ```json
 {
@@ -76,11 +105,16 @@ Añade un objeto al arreglo `noticias` de `data/noticias.json`:
 - Las destacadas del inicio son las 3 más recientes con `"destacada": true`.
 - Los párrafos del contenido se separan con `\n\n`.
 
+## Versión anterior
+
+La primera versión (HTML, CSS y JavaScript sin frameworks) está guardada en la
+etiqueta [`v1-html`](https://github.com/JhanpolPb/nexo-diario/tree/v1-html).
+
 ## Créditos
 
 Fotografías de [Unsplash](https://unsplash.com/), usadas en la maqueta original.
 Las noticias son contenido de ejemplo para fines académicos.
 
-
 ## Autor
+
 Dev. Jhanpol Parra Barreto

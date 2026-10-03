@@ -1,0 +1,28 @@
+<div class="container pagina">
+  <div class="mb-5">
+    <p class="antetitulo">Guardados</p>
+    <h1 class="titulo-pagina">Mis favoritos</h1>
+    <p class="subtitulo">Noticias que has guardado para consultar después.</p>
+  </div>
+
+  @if (servicio.estado() === 'error') {
+    <app-error-carga />
+  }
+
+  <div class="row g-4">
+    @for (noticia of guardadas(); track noticia.id) {
+      <div class="col-md-6 col-lg-4">
+        <app-tarjeta-noticia [noticia]="noticia" />
+      </div>
+    }
+  </div>
+
+  @if (servicio.estado() === 'listo' && guardadas().length === 0) {
+    <div class="estado-vacio">
+      <div class="estado-vacio-icono"><i class="bi bi-heart" aria-hidden="true"></i></div>
+      <h2>Aún no tienes noticias favoritas</h2>
+      <p>Explora nuestras noticias y guarda las que quieras consultar después.</p>
+      <a class="btn btn-nexo" routerLink="/noticias">Explorar noticias</a>
+    </div>
+  }
+</div>

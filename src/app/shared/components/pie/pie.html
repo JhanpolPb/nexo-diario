@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row g-4">
+    <div class="col-md-6">
+      <a class="logo mb-3" routerLink="/">
+        <span class="logo-marca" aria-hidden="true">N</span>
+        <span>NexoDiario</span>
+      </a>
+      <p class="pie-descripcion">
+        Noticias, experiencias y tendencias en un solo lugar. Tu fuente confiable de información digital.
+      </p>
+      <div class="redes">
+        @for (red of redes; track red.nombre) {
+          <a href="#" (click)="$event.preventDefault()" [attr.aria-label]="'Nexo Diario en ' + red.nombre">
+            <i class="bi {{ red.icono }}" aria-hidden="true"></i>
+          </a>
+        }
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <h2>Navegación</h2>
+      <ul>
+        @for (item of menu; track item.ruta) {
+          <li><a [routerLink]="item.ruta">{{ item.texto }}</a></li>
+        }
+      </ul>
+    </div>
+    <div class="col-6 col-md-3">
+      <h2>Contacto</h2>
+      <ul>
+        <li>contacto&#64;nexodiario.com</li>
+        <li>+57 601 234 5678</li>
+        <li>Bogotá, Colombia</li>
+      </ul>
+    </div>
+  </div>
+  <div class="pie-legal">
+    <p class="m-0">© {{ anio }} Nexo Diario. Todos los derechos reservados.</p>
+    <small>Diseñado con ❤ en Colombia</small>
+  </div>
+</div>

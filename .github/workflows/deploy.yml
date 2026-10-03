@@ -1,0 +1,49 @@
+# Compila la app de Angular y la publica en GitHub Pages en cada push a main.
+name: Desplegar en GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build:pages
+
+      # GitHub Pages responde 404.html para rutas desconocidas; al copiar
+      # index.html, Angular puede abrir directamente /noticia/3, /contacto, etc.
+      - run: cp dist/nexo-diario/browser/index.html dist/nexo-diario/browser/404.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/nexo-diario/browser
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - id: despliegue
+        uses: actions/deploy-pages@v4

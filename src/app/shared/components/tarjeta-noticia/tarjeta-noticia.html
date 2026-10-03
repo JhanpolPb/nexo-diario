@@ -1,0 +1,18 @@
+@let n = noticia();
+<article class="tarjeta-noticia">
+  <div class="tarjeta-noticia-media">
+    <img [src]="n.imagen" alt="" loading="lazy" width="800" height="500">
+    <app-boton-favorito [id]="n.id" [titulo]="n.titulo" />
+  </div>
+  <div class="tarjeta-noticia-cuerpo">
+    <span class="etiqueta-categoria {{ n.categoria | claseCategoria }}">{{ n.categoria }}</span>
+    <h3 class="tarjeta-noticia-titulo">{{ n.titulo }}</h3>
+    <p class="tarjeta-noticia-resumen">{{ n.resumen }}</p>
+    <div class="tarjeta-noticia-pie">
+      <time class="tarjeta-noticia-fecha" [attr.datetime]="n.fecha">{{ n.fecha | fechaCorta }}</time>
+      <a class="btn btn-nexo btn-ver-mas" [routerLink]="['/noticia', n.id]">
+        Ver más <span aria-hidden="true">→</span><span class="visually-hidden">: {{ n.titulo }}</span>
+      </a>
+    </div>
+  </div>
+</article>

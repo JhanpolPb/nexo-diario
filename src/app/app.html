@@ -1,0 +1,13 @@
+<a class="saltar-contenido" href="#contenido" (click)="saltarAlContenido($event)">Saltar al contenido</a>
+
+<header class="encabezado">
+  <app-encabezado />
+</header>
+
+<main id="contenido" #contenido tabindex="-1">
+  <router-outlet />
+</main>
+
+<footer class="pie">
+  <app-pie />
+</footer>

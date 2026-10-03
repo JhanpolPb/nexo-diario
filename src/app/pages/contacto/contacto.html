@@ -1,0 +1,86 @@
+<div class="container pagina">
+  <div class="text-center mb-5 pb-3">
+    <p class="antetitulo">Escríbenos</p>
+    <h1 class="titulo-pagina mb-3">Contáctanos</h1>
+    <p class="subtitulo mx-auto" style="max-width: 32rem;">
+      ¿Tienes alguna pregunta, sugerencia o quieres conocer más información? Escríbenos.
+    </p>
+  </div>
+
+  <div class="row g-5 contacto-grid">
+    <div class="col-lg-8">
+      @if (!enviado()) {
+        <form class="panel formulario-contacto" #elementoFormulario [formGroup]="formulario" (ngSubmit)="enviar()" novalidate>
+          <div class="mb-4">
+            <label class="form-label" for="nombre">Nombre</label>
+            <input class="form-control" type="text" id="nombre" formControlName="nombre" placeholder="Tu nombre"
+                   autocomplete="name" aria-describedby="error-nombre" (blur)="alSalir('nombre')"
+                   [class.is-invalid]="mostrarEstado('nombre') && formulario.controls.nombre.invalid"
+                   [class.is-valid]="mostrarEstado('nombre') && formulario.controls.nombre.valid"
+                   [attr.aria-invalid]="mostrarEstado('nombre') ? formulario.controls.nombre.invalid : null">
+            <div class="invalid-feedback" id="error-nombre">{{ error('nombre') }}</div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label" for="correo">Correo electrónico</label>
+            <input class="form-control" type="email" id="correo" formControlName="correo" placeholder="tu@correo.com"
+                   autocomplete="email" aria-describedby="error-correo" (blur)="alSalir('correo')"
+                   [class.is-invalid]="mostrarEstado('correo') && formulario.controls.correo.invalid"
+                   [class.is-valid]="mostrarEstado('correo') && formulario.controls.correo.valid"
+                   [attr.aria-invalid]="mostrarEstado('correo') ? formulario.controls.correo.invalid : null">
+            <div class="invalid-feedback" id="error-correo">{{ error('correo') }}</div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label" for="asunto">Asunto</label>
+            <input class="form-control" type="text" id="asunto" formControlName="asunto"
+                   placeholder="¿Sobre qué quieres escribirnos?" maxlength="100" aria-describedby="error-asunto"
+                   (blur)="alSalir('asunto')"
+                   [class.is-invalid]="mostrarEstado('asunto') && formulario.controls.asunto.invalid"
+                   [class.is-valid]="mostrarEstado('asunto') && formulario.controls.asunto.valid"
+                   [attr.aria-invalid]="mostrarEstado('asunto') ? formulario.controls.asunto.invalid : null">
+            <div class="invalid-feedback" id="error-asunto">{{ error('asunto') }}</div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label" for="mensaje">Mensaje</label>
+            <textarea class="form-control" id="mensaje" formControlName="mensaje" rows="5" placeholder="Tu mensaje"
+                      maxlength="1000" aria-describedby="error-mensaje contador-mensaje" (blur)="alSalir('mensaje')"
+                      [class.is-invalid]="mostrarEstado('mensaje') && formulario.controls.mensaje.invalid"
+                      [class.is-valid]="mostrarEstado('mensaje') && formulario.controls.mensaje.valid"
+                      [attr.aria-invalid]="mostrarEstado('mensaje') ? formulario.controls.mensaje.invalid : null"></textarea>
+            <div class="invalid-feedback" id="error-mensaje">{{ error('mensaje') }}</div>
+            <div class="form-text text-end" id="contador-mensaje">{{ formulario.controls.mensaje.value.length }}/1000</div>
+          </div>
+
+          <button class="btn btn-nexo-oscuro btn-enviar" type="submit">Enviar mensaje</button>
+        </form>
+      } @else {
+        <div class="panel contacto-exito" #panelExito tabindex="-1">
+          <div class="contacto-exito-icono"><i class="bi bi-check-lg" aria-hidden="true"></i></div>
+          <h2>Mensaje enviado correctamente.</h2>
+          <p>Gracias por comunicarte con Nexo Diario.<br>Te responderemos pronto.</p>
+          <button class="btn btn-outline-secondary mt-2" type="button" (click)="nuevoMensaje()">Enviar otro mensaje</button>
+        </div>
+      }
+    </div>
+
+    <aside class="col-lg-4 d-grid gap-3 align-content-start">
+      <div class="panel panel-info">
+        <h2>Información de contacto</h2>
+        <ul class="lista-contacto">
+          @for (dato of datosContacto; track dato.etiqueta) {
+            <li>
+              <i class="bi {{ dato.icono }}" aria-hidden="true"></i>
+              <div><small>{{ dato.etiqueta }}</small><span>{{ dato.valor }}</span></div>
+            </li>
+          }
+        </ul>
+      </div>
+      <div class="panel-destacado">
+        <p>¿Quieres escribir para nosotros?</p>
+        <p>Envíanos tu propuesta editorial y forma parte del equipo.</p>
+      </div>
+    </aside>
+  </div>
+</div>

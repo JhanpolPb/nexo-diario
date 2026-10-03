@@ -1,0 +1,56 @@
+<div class="container pagina detalle">
+  <a class="enlace-volver" routerLink="/noticias"><span aria-hidden="true">←</span> Volver a noticias</a>
+
+  <article aria-live="polite">
+    @if (servicio.estado() === 'error') {
+      <app-error-carga />
+    } @else if (noticia(); as n) {
+      <span class="etiqueta-categoria {{ n.categoria | claseCategoria }}">{{ n.categoria }}</span>
+      <h1 class="detalle-titulo">{{ n.titulo }}</h1>
+
+      <div class="detalle-meta">
+        <span>Por <strong>{{ n.autor }}</strong></span>
+        <span aria-hidden="true">·</span>
+        <time [attr.datetime]="n.fecha">{{ n.fecha | fechaCorta }}</time>
+        <span aria-hidden="true">·</span>
+        <span>{{ n.lecturaMin }} min de lectura</span>
+      </div>
+
+      <figure class="detalle-imagen">
+        <img [src]="n.imagen" alt="" width="800" height="500">
+      </figure>
+
+      <div class="detalle-contenido">
+        @for (parrafo of parrafos(); track $index) {
+          <p>{{ parrafo }}</p>
+        }
+      </div>
+
+      <section class="detalle-info" aria-labelledby="titulo-info">
+        <h2 id="titulo-info">Información adicional</h2>
+        <dl>
+          <div><dt>Categoría</dt><dd>{{ n.categoria }}</dd></div>
+          <div><dt>Autor</dt><dd>{{ n.autor }}</dd></div>
+          <div><dt>Publicado</dt><dd>{{ n.fecha | fechaCorta }}</dd></div>
+          <div><dt>Fuente</dt><dd>Nexo Diario</dd></div>
+        </dl>
+      </section>
+
+      <div class="detalle-acciones">
+        <button type="button" class="btn btn-favorito-detalle" [attr.aria-pressed]="esFavorita()"
+                (click)="favoritos.alternar(n.id)">
+          <i class="bi" [class.bi-heart-fill]="esFavorita()" [class.bi-heart]="!esFavorita()" aria-hidden="true"></i>
+          {{ esFavorita() ? 'Guardado en favoritos' : 'Agregar a favoritos' }}
+        </button>
+        <a class="btn btn-nexo" routerLink="/contacto">Contactar</a>
+      </div>
+    } @else if (servicio.estado() === 'listo') {
+      <div class="estado-vacio">
+        <div class="estado-vacio-icono"><i class="bi bi-newspaper" aria-hidden="true"></i></div>
+        <h1>No encontramos esta noticia</h1>
+        <p>Es posible que el enlace esté incompleto o que la noticia ya no esté disponible.</p>
+        <a class="btn btn-nexo" routerLink="/noticias">Ver todas las noticias</a>
+      </div>
+    }
+  </article>
+</div>

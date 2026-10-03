@@ -1,0 +1,86 @@
+<!-- Bienvenida -->
+<section class="hero">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-md-6">
+        <span class="hero-etiqueta">Portal de noticias digitales</span>
+        <h1 class="hero-titulo">Noticias, experiencias y tendencias <span>en un solo lugar</span></h1>
+        <p class="hero-texto">
+          Mantente informado con las últimas noticias en tecnología, educación, turismo y comercio.
+          Contenido curado, perspectivas locales y globales.
+        </p>
+        <a class="btn btn-blanco" routerLink="/noticias">Explorar noticias <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="col-md-6 d-none d-md-block">
+        <div class="hero-imagen">
+          <img src="assets/img/hero.jpg" alt="Representación abstracta de información digital" width="600" height="400">
+          <div class="hero-dato">
+            <p class="hero-dato-etiqueta">Publicaciones hoy</p>
+            <p class="hero-dato-valor">{{ publicacionesHoy }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Noticias destacadas -->
+<section class="container seccion" aria-labelledby="titulo-destacadas">
+  <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-4 pb-2">
+    <div>
+      <p class="antetitulo">Lo más relevante</p>
+      <h2 class="titulo-seccion" id="titulo-destacadas">Noticias destacadas</h2>
+      <p class="subtitulo">Las historias más relevantes del momento</p>
+    </div>
+    <a class="enlace-texto" routerLink="/noticias">Ver todas <span aria-hidden="true">→</span></a>
+  </div>
+
+  @if (servicio.estado() === 'error') {
+    <app-error-carga />
+  }
+  <div class="row g-4" aria-live="polite">
+    @for (noticia of servicio.destacadas(); track noticia.id) {
+      <div class="col-md-6 col-lg-4">
+        <app-tarjeta-noticia [noticia]="noticia" />
+      </div>
+    }
+  </div>
+</section>
+
+<!-- Categorías -->
+<section class="bg-white seccion" aria-labelledby="titulo-categorias">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="antetitulo">Categorías</p>
+      <h2 class="titulo-seccion mb-2" id="titulo-categorias">Explora por categoría</h2>
+      <p class="subtitulo">Encuentra noticias según tus intereses</p>
+    </div>
+    <div class="row g-3">
+      @for (categoria of servicio.categorias(); track categoria.nombre) {
+        @let total = servicio.contarPorCategoria(categoria.nombre);
+        <div class="col-6 col-md-3">
+          <a class="tarjeta-categoria {{ categoria.nombre | claseCategoria }}"
+             routerLink="/noticias" [queryParams]="{ categoria: categoria.nombre }">
+            <div class="tarjeta-categoria-media">
+              <img [src]="categoria.imagen" alt="" loading="lazy" width="400" height="200">
+            </div>
+            <div class="tarjeta-categoria-cuerpo">
+              <h3>{{ categoria.nombre }}</h3>
+              <p>{{ total }} {{ total === 1 ? 'artículo' : 'artículos' }}</p>
+            </div>
+          </a>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Llamado a la acción -->
+<section class="container seccion">
+  <div class="cta">
+    <p class="antetitulo">Contáctanos</p>
+    <h2>¿Quieres conocer más?</h2>
+    <p>¿Tienes preguntas, sugerencias o quieres colaborar con Nexo Diario? Estamos para escucharte.</p>
+    <a class="btn btn-blanco" routerLink="/contacto">Contáctanos</a>
+  </div>
+</section>

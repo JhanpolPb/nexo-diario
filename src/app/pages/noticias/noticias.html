@@ -1,0 +1,32 @@
+<div class="container pagina">
+  <div class="mb-5">
+    <p class="antetitulo">Publicaciones</p>
+    <h1 class="titulo-pagina">Todas las noticias</h1>
+    <p class="subtitulo">Explora nuestras últimas publicaciones</p>
+  </div>
+
+  <div class="filtros" role="group" aria-label="Filtrar por categoría">
+    @for (opcion of opciones(); track opcion) {
+      <button type="button" class="filtro" [attr.aria-pressed]="opcion === filtroActivo()"
+              (click)="filtrar(opcion)">{{ opcion }}</button>
+    }
+  </div>
+
+  <p class="visually-hidden" aria-live="polite">{{ resumenFiltro() }}</p>
+
+  @if (servicio.estado() === 'error') {
+    <app-error-carga />
+  }
+
+  <div class="row g-4">
+    @for (noticia of visibles(); track noticia.id) {
+      <div class="col-md-6 col-lg-4">
+        <app-tarjeta-noticia [noticia]="noticia" />
+      </div>
+    } @empty {
+      @if (servicio.estado() === 'listo') {
+        <p class="col-12 text-center text-secondary py-5">No hay noticias en esta categoría por ahora.</p>
+      }
+    }
+  </div>
+</div>
