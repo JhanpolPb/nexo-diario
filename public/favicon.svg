@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Marca de Nexo Diario: "N" blanca sobre el azul marino del logo -->
+  <rect width="32" height="32" rx="7" fill="#1E3A5F"/>
+  <path d="M8.5 24V8h3.6l7.7 10.3V8h3.7v16h-3.6l-7.7-10.3V24z" fill="#fff"/>
+</svg>
